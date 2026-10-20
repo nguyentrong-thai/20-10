@@ -54,9 +54,12 @@ document.getElementById('male-choice').addEventListener('click', () => {
   identityGate.classList.add('warning-state');
   document.getElementById('insist-male').focus();
 });
-document.getElementById('insist-male').addEventListener('click', () => {
+function insistMale() {
   if (maleAttempts >= 10) return;
   maleAttempts++;
+  warningMark.classList.remove('impact');
+  warningMark.offsetWidth;
+  warningMark.classList.add('impact');
   warningMark.style.transform = `scale(${.25 + maleAttempts * .075})`;
   warningMark.style.opacity = String(.15 + maleAttempts * .085);
   if (maleAttempts === 5) {
@@ -81,7 +84,9 @@ document.getElementById('insist-male').addEventListener('click', () => {
     identityGate.classList.add('refusal-state');
     document.getElementById('back-from-refusal').focus();
   }
-});
+}
+document.getElementById('insist-male').addEventListener('click', insistMale);
+document.getElementById('tach-tch').addEventListener('click', insistMale);
 document.getElementById('back-to-identity').addEventListener('click', resetIdentityChoice);
 document.getElementById('back-from-refusal').addEventListener('click', resetIdentityChoice);
 const flowerTypes = [
