@@ -1,0 +1,15 @@
+Asset: dist/assets/pink-flower.webp
+Source: ../673ab7be5643b7682c1d3bed41113934.jpg
+Method: built-in ImageGen edit; transparent output, then WebP encoding at 512x768 for delivery (67,386 bytes).
+Prompt: Extract the large pale pink cosmos/daisy flower near the lower portion of the supplied photo. Preserve photographic petal texture, yellow-brown center and pale pink color. Isolate one complete front-facing flower with a slender green stem and delicate leaves on a transparent background. Remove sky and surrounding flowers. Portrait composition with the whole stem visible. No text or frame.
+This is an AI-edited derivative of the supplied photo, not a pixel-identical crop.
+Performance: 12 flower image layers on mobile / 20 desktop; shared decoded 67 KB texture; 10 ambient petals; transform/opacity animations; no animated blur or box-shadow; pause CSS animation in hidden tabs.
+Validation: interaction checks passed. Frame rate and visual browser verification unavailable in this environment.
+
+Additional flower assets (built-in ImageGen edits from the same supplied flower photo):
+- dist/assets/white-daisy.webp: isolate one white daisy with golden center, slender green stem and two leaves; preserve photographic texture; remove sky and other flowers; transparent portrait 2:3, no text, shadow or frame.
+- dist/assets/peach-rose.webp: isolate one pale peach-pink rose with full slender green stem and two rose leaves; preserve curled petals and photographic texture; remove sky and other flowers; transparent portrait 2:3, no text, shadow or frame.
+Both encoded to 512x768 WebP; garden cycles through pink cosmos, white daisy and peach rose. All three images decode before garden reveal. Layer counts remain 12 mobile / 20 desktop.
+
+Garden expansion: sunflower.webp and lilac-aster.webp created with built-in ImageGen as transparent photographic edits of supplied flower photos, using the prompts "Isolate one golden sunflower with complete green stem and leaves" and "Isolate one lilac aster with yellow center, full slender stem and leaves"; preserve photo texture, remove sky and other flowers, transparent portrait 2:3, no text, frame, shadow or glow. Encoded as 384x576 WebP. Total five flower textures about 190 KB.
+Music now uses the user-supplied MP3, copied byte-for-byte to dist/assets/tung-ngay-yeu-em.mp3. Playback is attempted on load, falls back to the first real user gesture when blocked, and respects manual pause. Garden wishes use 60 unique messages, remember used message IDs only in memory for the current visit. Reload resets all 60 wishes; legacy saved progress is removed. No repeats during a single visit.

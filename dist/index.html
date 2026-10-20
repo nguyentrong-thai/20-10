@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#dceff7">
+  <meta name="color-scheme" content="light only">
+  <meta name="description" content="Một đóa hoa nhỏ, một lời chúc dịu dàng. Chúc mừng ngày Phụ nữ Việt Nam 20/10.">
+  <title>Gửi bạn một đóa hoa · 20/10</title>
+  <link rel="preload" as="image" href="assets/pink-flower.webp">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="garden" aria-hidden="true"></div>
+  <div class="wash" aria-hidden="true"></div>
+  <div class="clouds" aria-hidden="true"><span class="cloud cloud-one"></span><span class="cloud cloud-two"></span><span class="cloud cloud-three"></span></div>
+  <div id="flower-field" role="group" aria-label="Vườn hoa, bấm từng bông để nhận lời chúc" inert></div>
+  <div id="petals" aria-hidden="true"></div>
+  <header><a href="./" aria-label="Trang chủ">gửi một chút thương <span>✳</span></a><span class="occasion">NGÀY PHỤ NỮ VIỆT NAM</span><span class="header-date">20 / 10</span></header>
+  <main>
+    <section class="intro" id="intro" aria-labelledby="title">
+      <div class="eyebrow"><span></span> MỘT NGÀY THẬT ĐẶC BIỆT <span></span></div>
+      <h1 id="title">Gửi bạn<br>một đóa <em>yêu thương.</em></h1>
+      <p class="lead">Dành tặng những người phụ nữ tuyệt vời.<br>Mong hôm nay, và mọi ngày, đều dịu dàng với bạn.</p>
+      <div class="flower-stage" aria-label="Một đóa hoa hồng pastel đang khẽ đung đưa" role="img">
+        <div class="halo"></div><span class="spark s1">✧</span><span class="spark s2">✧</span><span class="spark s3">·</span>
+        <img class="flower" src="assets/pink-flower.webp" width="512" height="768" fetchpriority="high" decoding="async" alt="Đóa hoa cúc hồng từ ảnh bạn gửi">
+        <span class="flower-note">một bông hoa, ngàn lời thương</span>
+      </div>
+      <div class="action-space"><button id="open" class="primary"><span>Nhận một chút yêu thương</span><span aria-hidden="true">↗</span></button></div>
+      <p class="hint" id="hint">Chạm nhẹ thôi, có điều dễ thương đang chờ bạn.</p>
+    </section>
+    <section class="letter" id="letter" hidden aria-labelledby="letter-title">
+      <div class="letter-photo"><img src="assets/daisies.jpg" alt="Những bông cúc hồng, tím và vàng dưới bầu trời xanh"><span>Một ngày dành riêng cho bạn</span></div>
+      <div class="letter-content"><span class="eyebrow">VỚI TẤT CẢ SỰ YÊU THƯƠNG</span><div class="letter-date">20<span> / </span>10</div>
+        <h2 id="letter-title" tabindex="-1">Chúc bạn luôn<br><em>rạng rỡ như hoa.</em></h2>
+        <p>Nhân ngày Phụ nữ Việt Nam, gửi đến bạn một đóa hoa cùng những lời chúc dịu dàng nhất.</p>
+        <p>Mong bạn luôn khỏe mạnh, bình an và có thật nhiều niềm vui. Mong những cố gắng được trân trọng, những ước mơ được nâng niu, và mỗi ngày đều có một lý do để mỉm cười.</p>
+        <p>Dù ở bất kỳ vai trò nào, bạn vẫn xứng đáng được yêu thương — hôm nay và tất cả những ngày sau nữa.</p>
+        <div class="signature">Chúc mừng ngày 20 tháng 10 ♡</div>
+        <div class="garden-invitation">
+          <h3>Còn cả một vườn hoa chờ bạn khám phá ✿</h3>
+          <p id="garden-guide">Bấm nút bên dưới để vào vườn. Chạm vào từng bông hoa để mở một thông điệp và lời chúc khác nhau dành cho bạn.</p>
+          <button id="view-garden" class="explore-button" aria-describedby="garden-guide">Khám phá vườn hoa <span aria-hidden="true">↗</span></button>
+        </div>
+        <div class="letter-actions"><button id="again" class="secondary">♡ &nbsp; Nhận thêm một đóa hoa</button><button id="back" class="text-button">Xem lại từ đầu ↶</button></div>
+        <span id="status" role="status"></span>
+      </div>
+    </section>
+    <div id="garden-actions" hidden tabindex="-1"><p>Cả một vườn thương, dành tặng bạn.</p><div class="garden-instruction">✿ Chạm vào từng bông hoa để mở một lời chúc mới</div><span id="wish-counter" role="status"></span><button id="read-again" class="secondary">Mở lại lời chúc ♡</button></div>
+  </main>
+  <dialog id="wish-dialog" aria-labelledby="wish-title" aria-describedby="wish-text">
+    <button class="dialog-close" id="close-wish" aria-label="Đóng lời chúc">×</button>
+    <img id="wish-flower" src="assets/pink-flower.webp" alt="" width="120" height="180">
+    <span class="eyebrow" id="wish-species">MỘT ĐÓA HOA DÀNH CHO BẠN</span>
+    <h2 id="wish-title"></h2>
+    <p id="wish-text"></p>
+    <button class="secondary" id="continue-garden">Khám phá bông hoa khác ♡</button>
+  </dialog>
+  <audio id="background-music" src="assets/tung-ngay-yeu-em.mp3" preload="auto" loop></audio>
+  <button id="music-toggle" class="music-toggle" type="button" aria-pressed="false" aria-label="Bật nhạc Từng Ngày Yêu Em" title="Từng Ngày Yêu Em — buitruonglinh"><span aria-hidden="true">♫</span> <span id="music-label">Đang tải nhạc…</span></button>
+  <span id="music-status" class="sr-only" role="status"></span>
+  <span class="site-credit">made by tung</span>
+  <footer><span>20.10 <span class="footer-line"></span> HAPPY VIETNAMESE WOMEN'S DAY</span><span>Gói ghém bằng cả tấm lòng ♡</span></footer>
+  <script src="wishes.js"></script>
+  <script src="music.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
