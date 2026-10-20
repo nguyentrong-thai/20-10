@@ -49,7 +49,8 @@ const ids = ['intro','letter','open','petals','flower-field','garden-actions','w
   'wish-flower','wish-species','wish-text','wish-title','close-wish','continue-garden','again','status',
   'back','hint','view-garden','read-again','letter-title','identity-gate','identity-choice',
   'identity-warning','identity-refusal','warning-mark','female-choice',
-  'male-choice','insist-male','back-to-identity','back-from-refusal','site-content'];
+  'male-choice','insist-male','back-to-identity','back-from-refusal','site-content',
+  'warning-title','warning-copy'];
 const nodes = Object.fromEntries(ids.map(id=>[id,element()]));
 nodes['identity-warning'].hidden = true;
 nodes['identity-refusal'].hidden = true;
@@ -65,12 +66,26 @@ async function run() {
   nodes['male-choice'].click();
   assert(!nodes['identity-warning'].hidden,'Male selection opens the warning');
   assert.equal(nodes['site-content'].inert,true,'The website stays inaccessible from the warning');
-  for(let i=1;i<=10;i++) nodes['insist-male'].click();
+  for(let i=1;i<=4;i++) nodes['insist-male'].click();
+  assert.equal(nodes['warning-title'].textContent,'CẢNH BÁO');
+  nodes['insist-male'].click();
+  assert.equal(nodes['warning-title'].textContent,'CẢNH BÁO NGHIÊM TRỌNG','The fifth click escalates the warning');
+  assert(nodes['identity-gate'].classList.contains('warning-level-5'));
+  nodes['insist-male'].click();
+  nodes['insist-male'].click();
+  assert.equal(nodes['warning-title'].textContent,'NGUY HIỂM','The seventh click shows the danger warning');
+  assert.equal(nodes['warning-mark'].textContent,'⚠');
+  nodes['insist-male'].click();
+  nodes['insist-male'].click();
+  assert.equal(nodes['warning-title'].textContent,'CẢNH BÁO CUỐI CÙNG','The ninth click shows the final disclaimer');
+  assert(nodes['warning-copy'].textContent.includes('tự chịu trách nhiệm'));
+  nodes['insist-male'].click();
   assert(nodes['identity-refusal'].hidden===false,'Ten confirmations open the refusal screen');
   assert(!read('index.html').includes('Lần xác nhận'),'Confirmation count stays hidden');
   assert(read('index.html').includes('src="assets/refusal.webp"'));
   nodes['back-from-refusal'].click();
   assert(!nodes['identity-choice'].hidden,'Returning from refusal restores the choice');
+  assert(!nodes['identity-gate'].classList.contains('warning-level-5'),'Returning resets warning escalation');
   nodes['female-choice'].click();
   assert(nodes['identity-gate'].hidden,'Female selection opens the original greeting');
   assert.equal(nodes['site-content'].inert,false);

@@ -20,9 +20,18 @@ const identityChoice = document.getElementById('identity-choice');
 const identityWarning = document.getElementById('identity-warning');
 const identityRefusal = document.getElementById('identity-refusal');
 const warningMark = document.getElementById('warning-mark');
+const warningTitle = document.getElementById('warning-title');
+const warningCopy = document.getElementById('warning-copy');
 let maleAttempts = 0;
-function resetIdentityChoice() {
+function resetWarning() {
   maleAttempts = 0;
+  warningMark.textContent = '✕';
+  warningTitle.textContent = 'CẢNH BÁO';
+  warningCopy.textContent = 'Đàn ông không được tiếp tục. Hãy quay lại.';
+  identityGate.classList.remove('warning-level-5', 'warning-level-7', 'warning-level-9');
+}
+function resetIdentityChoice() {
+  resetWarning();
   warningMark.style.transform = 'scale(.25)';
   warningMark.style.opacity = '.15';
   identityWarning.hidden = true;
@@ -37,7 +46,7 @@ document.getElementById('female-choice').addEventListener('click', () => {
   document.getElementById('open').focus();
 });
 document.getElementById('male-choice').addEventListener('click', () => {
-  maleAttempts = 0;
+  resetWarning();
   warningMark.style.transform = 'scale(.25)';
   warningMark.style.opacity = '.15';
   identityChoice.hidden = true;
@@ -50,6 +59,21 @@ document.getElementById('insist-male').addEventListener('click', () => {
   maleAttempts++;
   warningMark.style.transform = `scale(${.25 + maleAttempts * .075})`;
   warningMark.style.opacity = String(.15 + maleAttempts * .085);
+  if (maleAttempts === 5) {
+    identityGate.classList.add('warning-level-5');
+    warningTitle.textContent = 'CẢNH BÁO NGHIÊM TRỌNG';
+    warningCopy.textContent = 'Bạn đã được cảnh báo nhiều lần. Dừng lại và quay về.';
+  } else if (maleAttempts === 7) {
+    identityGate.classList.add('warning-level-7');
+    warningMark.textContent = '⚠';
+    warningTitle.textContent = 'NGUY HIỂM';
+    warningCopy.textContent = 'Không tiếp tục bấm. Hãy chọn “Quay lại” ngay.';
+  } else if (maleAttempts === 9) {
+    identityGate.classList.add('warning-level-9');
+    warningMark.textContent = '⚠';
+    warningTitle.textContent = 'CẢNH BÁO CUỐI CÙNG';
+    warningCopy.textContent = 'Nếu tiếp tục, bạn tự chịu trách nhiệm. Đây là cảnh báo cuối cùng.';
+  }
   if (maleAttempts === 10) {
     identityWarning.hidden = true;
     identityRefusal.hidden = false;
