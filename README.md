@@ -63,7 +63,7 @@ Không cần `npm install`.
 
 ## Hành vi hiện tại
 
-- Chọn “Phụ nữ” để vào trang; chọn “Đàn ông” sẽ hiện cảnh báo tăng dần: lần 5 nhấp nháy đỏ, lần 7 hiện cảnh báo nguy hiểm, lần 9 cảnh báo tự chịu trách nhiệm, và lần 10 hiện màn hình từ chối. Nút “Tách tách!” cũng xác nhận thêm một lần và tạo hiệu ứng hoạt hình.
+- Chọn “Phụ nữ” để vào trang; chọn “Đàn ông” sẽ hiện cảnh báo tăng dần: lần 5 nhấp nháy đỏ, lần 7 hiện cảnh báo nguy hiểm, lần 9 cảnh báo tự chịu trách nhiệm, và lần 10 hiện màn hình từ chối.
 - Sau khi chọn “Phụ nữ”, nhạc mới bắt đầu phát hoặc yêu cầu thao tác nếu trình duyệt chặn tự phát.
 - Mỗi lần tải lại trang trở về màn hình chọn đối tượng, vị trí cuộn đầu trang và đầy đủ 60 lời chúc.
 - Trong một lượt mở trang, các lời chúc không lặp; tải lại sẽ bắt đầu lượt mới.

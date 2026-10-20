@@ -50,7 +50,7 @@ const ids = ['intro','letter','open','petals','flower-field','garden-actions','w
   'back','hint','view-garden','read-again','letter-title','identity-gate','identity-choice',
   'identity-warning','identity-refusal','warning-mark','female-choice',
   'male-choice','insist-male','back-to-identity','back-from-refusal','site-content',
-  'warning-title','warning-copy','tach-tch'];
+  'warning-title','warning-copy'];
 const nodes = Object.fromEntries(ids.map(id=>[id,element()]));
 nodes['identity-warning'].hidden = true;
 nodes['identity-refusal'].hidden = true;
@@ -66,10 +66,8 @@ async function run() {
   nodes['male-choice'].click();
   assert(!nodes['identity-warning'].hidden,'Male selection opens the warning');
   assert.equal(nodes['site-content'].inert,true,'The website stays inaccessible from the warning');
-  for(let i=1;i<=4;i++) nodes['insist-male'].click();
-  assert.equal(nodes['warning-title'].textContent,'CẢNH BÁO');
-  nodes['tach-tch'].click();
-  assert(nodes['warning-mark'].classList.contains('impact'),'Tách tách triggers a comic impact');
+  for(let i=1;i<=5;i++) nodes['insist-male'].click();
+  assert(nodes['warning-mark'].classList.contains('impact'),'Male confirmation triggers a comic impact');
   assert.equal(nodes['warning-title'].textContent,'CẢNH BÁO NGHIÊM TRỌNG','The fifth click escalates the warning');
   assert(nodes['identity-gate'].classList.contains('warning-level-5'));
   nodes['insist-male'].click();
@@ -85,7 +83,7 @@ async function run() {
   assert(read('index.html').includes('<figcaption>MỜI QUAY XE</figcaption>'),'Refusal image has a playful caption');
   assert(read('style.css').includes('max-height:min(52vh,420px,calc(100dvh - 240px))'),'Refusal image is sized to fit the viewport');
   assert(read('style.css').includes('isolation:isolate;background-color:#8f101c'),'Warning overlay has an opaque background');
-  assert(read('index.html').includes('id="tach-tch"'),'Warning screen has a separate Tách tách button');
+  assert(!read('index.html').includes('Tách tách'),'Warning screen has no Tách tách button');
   assert(!read('index.html').includes('Lần xác nhận'),'Confirmation count stays hidden');
   assert(read('index.html').includes('src="assets/refusal.webp"'));
   nodes['back-from-refusal'].click();

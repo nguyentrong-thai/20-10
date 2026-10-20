@@ -86,7 +86,6 @@ function insistMale() {
   }
 }
 document.getElementById('insist-male').addEventListener('click', insistMale);
-document.getElementById('tach-tch').addEventListener('click', insistMale);
 document.getElementById('back-to-identity').addEventListener('click', resetIdentityChoice);
 document.getElementById('back-from-refusal').addEventListener('click', resetIdentityChoice);
 const flowerTypes = [
