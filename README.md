@@ -1,4 +1,4 @@
-# Vườn hoa chúc mừng 20/10 — made by tung
+# Vườn hoa chúc mừng 20/10
 
 Toàn bộ mã nguồn của trang chúc mừng: HTML, CSS, JavaScript, ảnh hoa, nhạc MP3 và các bài kiểm tra. Đây là website tĩnh, không cần backend, khóa API, dịch vụ Sites hay bước biên dịch.
 
@@ -56,13 +56,16 @@ Không cần `npm install`.
 ## Chỉnh nội dung
 
 - Lời chúc và tiêu đề: `dist/wishes.js`. Giữ số tiêu đề bằng số nội dung; mỗi lời chúc có một tiêu đề tương ứng.
-- Thiệp, hướng dẫn và chữ `made by tung`: `dist/index.html`.
+- Màn hình chọn đối tượng, cảnh báo và nội dung thiệp: `dist/index.html`.
 - Kích thước chữ, màu nền và hiệu ứng: `dist/style.css`.
+- Ảnh dùng ở màn hình từ chối phục vụ: `dist/assets/refusal.webp`.
 - Nhạc: `dist/assets/tung-ngay-yeu-em.mp3`. Có thể thay bằng một file MP3 khác cùng tên.
 
 ## Hành vi hiện tại
 
-- Mỗi lần tải lại trang: trở về màn hình nhận hoa, vị trí cuộn đầu trang và đầy đủ 60 lời chúc.
+- Chọn “Phụ nữ” để vào trang; chọn “Đàn ông” sẽ hiện cảnh báo, và sau 10 lần xác nhận sẽ hiện màn hình từ chối.
+- Sau khi chọn “Phụ nữ”, nhạc mới bắt đầu phát hoặc yêu cầu thao tác nếu trình duyệt chặn tự phát.
+- Mỗi lần tải lại trang trở về màn hình chọn đối tượng, vị trí cuộn đầu trang và đầy đủ 60 lời chúc.
 - Trong một lượt mở trang, các lời chúc không lặp; tải lại sẽ bắt đầu lượt mới.
 - Nhạc bắt đầu lại từ đầu và thử tự phát. Nếu trình duyệt chặn âm thanh tự động, lần chạm/bấm đầu tiên sẽ phát nhạc; người nhận vẫn có thể tắt.
 - Nền giữ màu xanh trắng ở chế độ sáng và tối. Bật giảm chuyển động trên hệ điều hành sẽ giảm/tắt các hiệu ứng.

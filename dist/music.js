@@ -3,6 +3,7 @@
   const button = document.getElementById('music-toggle');
   const label = document.getElementById('music-label');
   const status = document.getElementById('music-status');
+  let identitySelected = !document.getElementById('identity-gate');
   let wantsPlayback = true;
   let pending = false;
   let needsGesture = true;
@@ -14,7 +15,7 @@
     label.textContent = playing ? 'Tắt nhạc' : 'Bật nhạc';
   }
   async function playMusic() {
-    if (pending || !wantsPlayback || document.hidden) return;
+    if (pending || !identitySelected || !wantsPlayback || document.hidden) return;
     pending = true;
     try {
       await audio.play();
@@ -44,8 +45,15 @@
     }
   });
   function firstGesture(event) {
-    if (button.contains(event.target) || !needsGesture || !wantsPlayback) return;
+    if (!identitySelected || button.contains(event.target) || !needsGesture || !wantsPlayback) return;
     playMusic();
+  }
+  const femaleChoice = document.getElementById('female-choice');
+  if (femaleChoice) {
+    femaleChoice.addEventListener('click', () => {
+      identitySelected = true;
+      playMusic();
+    });
   }
   document.addEventListener('click', firstGesture);
   document.addEventListener('keydown', event => {

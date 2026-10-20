@@ -13,3 +13,5 @@ Both encoded to 512x768 WebP; garden cycles through pink cosmos, white daisy and
 
 Garden expansion: sunflower.webp and lilac-aster.webp created with built-in ImageGen as transparent photographic edits of supplied flower photos, using the prompts "Isolate one golden sunflower with complete green stem and leaves" and "Isolate one lilac aster with yellow center, full slender stem and leaves"; preserve photo texture, remove sky and other flowers, transparent portrait 2:3, no text, frame, shadow or glow. Encoded as 384x576 WebP. Total five flower textures about 190 KB.
 Music now uses the user-supplied MP3, copied byte-for-byte to dist/assets/tung-ngay-yeu-em.mp3. Playback is attempted on load, falls back to the first real user gesture when blocked, and respects manual pause. Garden wishes use 60 unique messages, remember used message IDs only in memory for the current visit. Reload resets all 60 wishes; legacy saved progress is removed. No repeats during a single visit.
+
+dist/assets/refusal.webp: user-supplied image used on the ten-confirmation refusal screen.

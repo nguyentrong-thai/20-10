@@ -11,6 +11,34 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <section class="identity-gate" id="identity-gate" role="dialog" aria-modal="true" aria-labelledby="identity-title">
+    <div class="identity-panel">
+      <div class="identity-choice" id="identity-choice">
+        <span class="eyebrow">TRƯỚC KHI VÀO</span>
+        <h1 id="identity-title">Bạn là ai?</h1>
+        <p class="identity-copy">Hãy chọn thật lòng nhé.</p>
+        <div class="identity-actions">
+          <button class="identity-button identity-primary" id="female-choice" type="button">Phụ nữ</button>
+          <button class="identity-button" id="male-choice" type="button">Đàn ông</button>
+        </div>
+      </div>
+      <div class="identity-warning" id="identity-warning" role="alert" hidden>
+        <div class="warning-mark" id="warning-mark" aria-hidden="true">✕</div>
+        <h2>CẢNH BÁO</h2>
+        <p>Đàn ông không được tiếp tục. Hãy quay lại.</p>
+        <div class="identity-actions">
+          <button class="identity-button identity-primary" id="insist-male" type="button">Tôi là đàn ông</button>
+          <button class="identity-button" id="back-to-identity" type="button">Quay lại</button>
+        </div>
+      </div>
+      <div class="identity-refusal" id="identity-refusal" hidden>
+        <img src="assets/refusal.webp" alt="">
+        <h2>Từ chối phục vụ</h2>
+        <button class="identity-button" id="back-from-refusal" type="button">Quay lại</button>
+      </div>
+    </div>
+  </section>
+  <div id="site-content" inert>
   <div class="garden" aria-hidden="true"></div>
   <div class="wash" aria-hidden="true"></div>
   <div class="clouds" aria-hidden="true"><span class="cloud cloud-one"></span><span class="cloud cloud-two"></span><span class="cloud cloud-three"></span></div>
@@ -60,8 +88,8 @@
   <audio id="background-music" src="assets/tung-ngay-yeu-em.mp3" preload="auto" loop></audio>
   <button id="music-toggle" class="music-toggle" type="button" aria-pressed="false" aria-label="Bật nhạc Từng Ngày Yêu Em" title="Từng Ngày Yêu Em — buitruonglinh"><span aria-hidden="true">♫</span> <span id="music-label">Đang tải nhạc…</span></button>
   <span id="music-status" class="sr-only" role="status"></span>
-  <span class="site-credit">made by tung</span>
   <footer><span>20.10 <span class="footer-line"></span> HAPPY VIETNAMESE WOMEN'S DAY</span><span>Gói ghém bằng cả tấm lòng ♡</span></footer>
+  </div>
   <script src="wishes.js"></script>
   <script src="music.js"></script>
   <script src="script.js"></script>

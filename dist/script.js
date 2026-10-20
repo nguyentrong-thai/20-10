@@ -15,6 +15,51 @@ let opened = false;
 let revealTimer;
 const field = document.getElementById('flower-field');
 const gardenActions = document.getElementById('garden-actions');
+const identityGate = document.getElementById('identity-gate');
+const identityChoice = document.getElementById('identity-choice');
+const identityWarning = document.getElementById('identity-warning');
+const identityRefusal = document.getElementById('identity-refusal');
+const warningMark = document.getElementById('warning-mark');
+let maleAttempts = 0;
+function resetIdentityChoice() {
+  maleAttempts = 0;
+  warningMark.style.transform = 'scale(.25)';
+  warningMark.style.opacity = '.15';
+  identityWarning.hidden = true;
+  identityRefusal.hidden = true;
+  identityChoice.hidden = false;
+  identityGate.classList.remove('warning-state', 'refusal-state');
+  document.getElementById('male-choice').focus();
+}
+document.getElementById('female-choice').addEventListener('click', () => {
+  identityGate.hidden = true;
+  document.getElementById('site-content').inert = false;
+  document.getElementById('open').focus();
+});
+document.getElementById('male-choice').addEventListener('click', () => {
+  maleAttempts = 0;
+  warningMark.style.transform = 'scale(.25)';
+  warningMark.style.opacity = '.15';
+  identityChoice.hidden = true;
+  identityWarning.hidden = false;
+  identityGate.classList.add('warning-state');
+  document.getElementById('insist-male').focus();
+});
+document.getElementById('insist-male').addEventListener('click', () => {
+  if (maleAttempts >= 10) return;
+  maleAttempts++;
+  warningMark.style.transform = `scale(${.25 + maleAttempts * .075})`;
+  warningMark.style.opacity = String(.15 + maleAttempts * .085);
+  if (maleAttempts === 10) {
+    identityWarning.hidden = true;
+    identityRefusal.hidden = false;
+    identityGate.classList.remove('warning-state');
+    identityGate.classList.add('refusal-state');
+    document.getElementById('back-from-refusal').focus();
+  }
+});
+document.getElementById('back-to-identity').addEventListener('click', resetIdentityChoice);
+document.getElementById('back-from-refusal').addEventListener('click', resetIdentityChoice);
 const flowerTypes = [
   {src:'assets/pink-flower.webp', name:'Cúc hồng'},
   {src:'assets/white-daisy.webp', name:'Cúc trắng'},

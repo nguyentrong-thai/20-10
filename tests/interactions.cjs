@@ -47,8 +47,13 @@ function element() {
 }
 const ids = ['intro','letter','open','petals','flower-field','garden-actions','wish-dialog','wish-counter',
   'wish-flower','wish-species','wish-text','wish-title','close-wish','continue-garden','again','status',
-  'back','hint','view-garden','read-again','letter-title'];
+  'back','hint','view-garden','read-again','letter-title','identity-gate','identity-choice',
+  'identity-warning','identity-refusal','warning-mark','female-choice',
+  'male-choice','insist-male','back-to-identity','back-from-refusal','site-content'];
 const nodes = Object.fromEntries(ids.map(id=>[id,element()]));
+nodes['identity-warning'].hidden = true;
+nodes['identity-refusal'].hidden = true;
+nodes['identity-gate'].hidden = false;
 const timeouts=[];
 const document = {hidden:false,body:element(),getElementById:id=>nodes[id],createElement:element,
   createDocumentFragment:element,addEventListener(){}};
@@ -57,6 +62,18 @@ const context = {document,window:{gardenWishes:blockedStorage,matchMedia:()=>({m
   setInterval:()=>1,clearInterval(){},setTimeout:(fn,ms)=>(timeouts.push({fn,ms}),timeouts.length),clearTimeout(){}};
 async function run() {
   vm.runInNewContext(read('script.js'),context);
+  nodes['male-choice'].click();
+  assert(!nodes['identity-warning'].hidden,'Male selection opens the warning');
+  assert.equal(nodes['site-content'].inert,true,'The website stays inaccessible from the warning');
+  for(let i=1;i<=10;i++) nodes['insist-male'].click();
+  assert(nodes['identity-refusal'].hidden===false,'Ten confirmations open the refusal screen');
+  assert(!read('index.html').includes('Lần xác nhận'),'Confirmation count stays hidden');
+  assert(read('index.html').includes('src="assets/refusal.webp"'));
+  nodes['back-from-refusal'].click();
+  assert(!nodes['identity-choice'].hidden,'Returning from refusal restores the choice');
+  nodes['female-choice'].click();
+  assert(nodes['identity-gate'].hidden,'Female selection opens the original greeting');
+  assert.equal(nodes['site-content'].inert,false);
   assert.equal(nodes['flower-field'].children[0].children.length,32);
   await nodes.open.click();
   timeouts.find(t=>t.ms===2300).fn();
@@ -79,7 +96,8 @@ async function run() {
   assert(!read('index.html').includes('name-card'),'Cancelled name screen stays removed');
   assert(!read('script.js').includes('approachPointer'),'Cancelled chasing button stays removed');
   assert(read('index.html').includes('light only'));
-  console.log('PASS: 60 unique wishes per visit, reload reset, legacy progress removal, exhaustion, denied storage, flower modal and navigation.');
+  assert(!read('index.html').includes('made by tung'));
+  console.log('PASS: identity gate, ten-step refusal, 60 unique wishes, flower modal and navigation.');
 
 }
 run().catch(error=>{console.error(error);process.exitCode=1;});

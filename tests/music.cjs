@@ -4,7 +4,7 @@ const assert = require('node:assert/strict');
 const path = require('node:path');
 const script = fs.readFileSync(path.join(__dirname, '../dist/music.js'), 'utf8');
 const flush = () => new Promise(resolve => setImmediate(resolve));
-function setup(blocked = false) {
+function setup(blocked = false, withIdentityGate = false) {
   const handlers = {};
   const button = {addEventListener(type,fn){this[type]=fn;},setAttribute(k,v){this[k]=v;},contains(target){return target===this;}};
   const label = {}, status = {};
@@ -18,10 +18,12 @@ function setup(blocked = false) {
     },
     pause(){this.paused=true;this.handlers.pause?.();}
   };
-  const nodes={'music-toggle':button,'music-label':label,'music-status':status,'background-music':audio};
+  const femaleChoice = {addEventListener(type,fn){this[type]=fn;}};
+  const nodes={'music-toggle':button,'music-label':label,'music-status':status,'background-music':audio,
+    'identity-gate':withIdentityGate ? {} : null,'female-choice':femaleChoice};
   const document={hidden:false,getElementById:id=>nodes[id],addEventListener:(type,fn)=>handlers[type]=fn};
   vm.runInNewContext(script,{document,window:{addEventListener(){}}});
-  return {audio,button,label,document,handlers};
+  return {audio,button,label,document,handlers,femaleChoice};
 }
 (async () => {
   const allowed = setup();
@@ -55,6 +57,12 @@ function setup(blocked = false) {
   assert.equal(blocked.audio.paused,true);
   blocked.document.hidden=false;blocked.handlers.visibilitychange();await flush();
   assert.equal(blocked.audio.paused,false,'Resume only when playback was requested');
+  const gated = setup(false,true);
+  await flush();
+  assert.equal(gated.audio.calls,0,'Do not autoplay before the identity choice');
+  gated.femaleChoice.click();
+  await flush();
+  assert.equal(gated.audio.calls,1,'Start music after the female choice');
   const source = fs.readFileSync(path.join(__dirname,'../dist/index.html'),'utf8');
   assert(source.includes('assets/tung-ngay-yeu-em.mp3'));
   assert(fs.statSync(path.join(__dirname,'../dist/assets/tung-ngay-yeu-em.mp3')).size>3000000);
